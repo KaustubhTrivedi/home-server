@@ -1,15 +1,11 @@
 services:
   portainer:
     image: portainer/portainer-ce:latest
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.portainer.rule=Host(`portrainer.kaustubhsstuff.com`)"
-      - "traefik.http.routers.portainer.entrypoints=websecure"
-      - "traefik.http.routers.portainer.tls.certresolver=myresolver"
-      - "traefik.http.services.portainer.loadbalancer.server.port=9443"
     volumes:
       - portainer_data:/data
       - /var/run/docker.sock:/var/run/docker.sock
     restart: unless-stopped
+    ports:
+      - "9443:9443"
 volumes:
   portainer_data:
