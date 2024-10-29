@@ -23,11 +23,11 @@ services:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
   portainer:
     image: portainer/portainer-ce:latest
-    # command:
-    #   - "traefik.enable=true"
-    #   - "traefik.http.routers.portainer.rule=Host(`kaustubhsstuff.com`)"
-    #   - "traefik.http.routers.portainer.entrypoints=websecure"
-    #   - "traefik.http.routers.portainer.tls.certresolver=myresolver"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.portainer.rule=Host(`kaustubhsstuff.com`)"
+      - "traefik.http.routers.portainer.entrypoints=websecure"
+      - "traefik.http.routers.portainer.tls.certresolver=myresolver"
     ports:
       - 9443:9443
     volumes:
