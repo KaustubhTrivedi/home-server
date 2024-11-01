@@ -28,6 +28,6 @@ services:
       - ./letsencrypt:/letsencrypt
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
     networks:
-      - proxy
+      - proxy_connect
 volumes:
   letsencrypt:
