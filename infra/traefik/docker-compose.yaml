@@ -3,6 +3,7 @@ services:
     image: "traefik:v3.1"
     container_name: "traefik"
     command:
+      - "--api.dashboard=true"
       - "--api.insecure=true" # Enable Traefik dashboard
       - "--providers.docker=true" # Enable Docker provider
       - "--entrypoints.web.address=:80" # HTTP entrypoint
