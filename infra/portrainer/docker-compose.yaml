@@ -6,6 +6,11 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     restart: unless-stopped
     ports:
-      - "9443:9443"
+      - "9000:9000"
+    networks:
+      - proxy
 volumes:
   portainer_data:
+networks:
+  proxy:
+    external: true

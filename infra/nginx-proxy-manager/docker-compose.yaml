@@ -9,6 +9,11 @@ services:
     volumes:
       - data:/data
       - letsencrypt:/etc/letsencrypt
+    networks:
+      - proxy
 volumes:
   data:
   letsencrypt:
+networks:
+  proxy:
+    external: true
