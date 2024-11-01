@@ -10,7 +10,7 @@ services:
       - "traefik.http.routers.portainer.rule=Host(`portainer.${DOMAIN}`)"
       - "traefik.http.routers.portainer.entrypoints=websecure"
       - "traefik.http.routers.portainer.tls.certresolver=cloudflare"
-      - "traefik.http.services.portainer.loadbalancer.server.port=9443" # Change if app uses different port
+      - "traefik.http.services.portainer.loadbalancer.server.port=9000" # Change if app uses different port
     networks:
       - proxy_connect
 volumes:
