@@ -5,12 +5,13 @@ services:
       - portainer_data:/data
       - /var/run/docker.sock:/var/run/docker.sock
     restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.app.rule=Host(`${SUBDOMAIN}.${DOMAIN}`)"
+      - "traefik.http.routers.app.entrypoints=websecure"
+      - "traefik.http.routers.app.tls.certresolver=cloudflare"
+      - "traefik.http.services.app.loadbalancer.server.port=9443" # Change if app uses different port
     ports:
-      - "9000:9000"
-    networks:
-      - proxy
+      - "9443:9443"
 volumes:
   portainer_data:
-networks:
-  proxy:
-    external: true
