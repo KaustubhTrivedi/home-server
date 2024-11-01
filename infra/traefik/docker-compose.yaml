@@ -31,3 +31,6 @@ services:
       - proxy_connect
 volumes:
   letsencrypt:
+networks:
+  proxy_connect:
+    external: true

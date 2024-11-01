@@ -15,3 +15,6 @@ services:
       - proxy_connect
 volumes:
   portainer_data:
+networks:
+  proxy_connect:
+    external: true
