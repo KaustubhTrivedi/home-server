@@ -16,7 +16,7 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.actual_server.rule=Host(`actual.kaustubhsstuff.com`)"
-      - "traefik.http.routers.recipes.entrypoints=websecure"
+      - "traefik.http.routers.actual_server.entrypoints=websecure"
       - "traefik.http.services.actual_server.loadbalancer.server.port=5006"
     networks:
       - proxy_connect
