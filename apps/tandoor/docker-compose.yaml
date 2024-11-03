@@ -7,31 +7,47 @@ services:
     env_file:
       - ./.env
     networks:
-      - proxy_connect
+      - default
 
   web_recipes:
     restart: always
     image: vabene1111/recipes
     env_file:
       - ./.env
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.portainer.rule=Host(`tandoor.${DOMAIN}`)"
-      - "traefik.http.routers.portainer.entrypoints=websecure"
-      - "traefik.http.routers.portainer.tls.certresolver=cloudflare"
-      - "traefik.http.services.portainer.loadbalancer.server.port=7000"
     volumes:
       - staticfiles:/opt/recipes/staticfiles
-      # Do not make this a bind mount, see https://docs.tandoor.dev/install/docker/#volumes-vs-bind-mounts
+      - nginx_config:/opt/recipes/nginx/conf.d
       - ./mediafiles:/opt/recipes/mediafiles
     depends_on:
       - db_recipes
     networks:
+      - default
+
+  nginx_recipes:
+    image: nginx:mainline-alpine
+    restart: always
+    env_file:
+      - ./.env
+    volumes:
+      - nginx_config:/etc/nginx/conf.d:ro
+      - staticfiles:/static:ro
+      - ./mediafiles:/media:ro
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.nginx_recipes.rule=Host(`tandoor.kaustubhsstuff.com`)"
+      - "traefik.http.routers.nginx_recipes.entrypoints=websecure" # your https endpoint
+      - "traefik.http.routers.nginx_recipes.tls.certresolver=cloudflare" # your cert resolver
+    depends_on:
+      - web_recipes
+    networks:
+      - default
       - proxy_connect
 
 networks:
+  default:
   proxy_connect:
     external: true
 
 volumes:
+  nginx_config:
   staticfiles:
