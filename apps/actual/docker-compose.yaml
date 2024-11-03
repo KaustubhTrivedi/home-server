@@ -19,7 +19,7 @@ services:
       - "traefik.http.routers.actual.rule=Host(`actual.${DOMAIN}`)"
       - "traefik.http.routers.actual.entrypoints=websecure"
       - "traefik.http.routers.actual.tls.certresolver=cloudflare"
-      - "traefik.http.routers.actual.loadbalancer.server.port=5006"
+      - "traefik.http.services.actual.loadbalancer.server.port=5006"
     networks:
       - proxy_connect
 
