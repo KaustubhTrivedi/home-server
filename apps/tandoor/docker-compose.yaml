@@ -14,10 +14,14 @@ services:
     image: vabene1111/recipes
     env_file:
       - ./.env
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.portainer.rule=Host(`tandoor.${DOMAIN}`)"
+      - "traefik.http.routers.portainer.entrypoints=websecure"
+      - "traefik.http.routers.portainer.tls.certresolver=cloudflare"
     volumes:
       - staticfiles:/opt/recipes/staticfiles
       # Do not make this a bind mount, see https://docs.tandoor.dev/install/docker/#volumes-vs-bind-mounts
-      - nginx_config:/opt/recipes/nginx/conf.d
       - ./mediafiles:/opt/recipes/mediafiles
     depends_on:
       - db_recipes
