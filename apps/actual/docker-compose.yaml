@@ -17,6 +17,7 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.actual_server.rule=Host(`actual.kaustubhsstuff.com`)"
       - "traefik.http.routers.actual_server.entrypoints=websecure"
+      - "traefik.http.routers.recipes.tls.certresolver=cloudflare"
       - "traefik.http.routers.actual_server.loadbalancer.server.port=5006"
     networks:
       - proxy_connect
