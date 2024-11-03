@@ -1,5 +1,5 @@
 services:
-  actual_server:
+  actual:
     image: docker.io/actualbudget/actual-server:latest
     ports:
       - '5006:5006'
@@ -15,10 +15,10 @@ services:
     restart: unless-stopped
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.actual_server.rule=Host(`actual.${DOMAIN}`)"
-      - "traefik.http.routers.actual_server.entrypoints=websecure"
-      - "traefik.http.routers.actual_server.tls.certresolver=cloudflare"
-      - "traefik.http.routers.actual_server.loadbalancer.server.port=5006"
+      - "traefik.http.routers.actual.rule=Host(`actual.${DOMAIN}`)"
+      - "traefik.http.routers.actual.entrypoints=websecure"
+      - "traefik.http.routers.actual.tls.certresolver=cloudflare"
+      - "traefik.http.routers.actual.loadbalancer.server.port=5006"
     networks:
       - proxy_connect
 
