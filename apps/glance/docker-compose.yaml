@@ -9,9 +9,9 @@ services:
     ports:
       - 8083:8080
     restart: unless-stopped
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.glance.rule=Host(`glance.${DOMAIN}`)"
-      - "traefik.http.routers.glance.entrypoints=websecure"
-      - "traefik.http.routers.glance.tls.certresolver=cloudflare"
-      - "traefik.http.services.glance.loadbalancer.server.port=8083"
+    # labels:
+    #   - "traefik.enable=true"
+    #   - "traefik.http.routers.glance.rule=Host(`glance.${DOMAIN}`)"
+    #   - "traefik.http.routers.glance.entrypoints=websecure"
+    #   - "traefik.http.routers.glance.tls.certresolver=cloudflare"
+    #   - "traefik.http.services.glance.loadbalancer.server.port=8083"
