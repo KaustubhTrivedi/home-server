@@ -66,5 +66,5 @@ pages:
 server:
   port: 8083
   assets-path: ./assets
-  host: localhost
+  host: 127.0.0.1
   base-url: https://glance.kaustubhsstuff.com
