@@ -14,7 +14,7 @@ services:
       - "traefik.http.routers.glance.rule=Host(`glance.${DOMAIN}`)"
       - "traefik.http.routers.glance.entrypoints=websecure"
       - "traefik.http.routers.glance.tls.certresolver=cloudflare"
-      - "traefik.http.services.glance.loadbalancer.server.port=8083"
+      - "traefik.http.services.glance.loadbalancer.server.port=8080"
     networks:
       - proxy_connect
 networks:
