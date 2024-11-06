@@ -63,6 +63,3 @@ pages:
                 name: AMD
               - symbol: RDDT
                 name: Reddit
-server:
-  port: 8083
-  assets-path: /home/user/glance-assets

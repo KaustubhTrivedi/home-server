@@ -2,6 +2,7 @@ services:
   glance:
     image: glanceapp/glance
     volumes:
+      - /home/kaustubh/glance-assets:/app/assets
       - ./glance.yml:/app/glance.yml
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
