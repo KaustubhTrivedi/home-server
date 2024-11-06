@@ -63,8 +63,3 @@ pages:
                 name: AMD
               - symbol: RDDT
                 name: Reddit
-server:
-  port: 8083
-  assets-path: ./assets
-  host: 127.0.0.1
-  base-url: glance.kaustubhsstuff.com
