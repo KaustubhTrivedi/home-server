@@ -11,7 +11,7 @@ pages:
             cache: 3h
             feeds:
               - url: https://timesofindia.indiatimes.com/rssfeedstopstories.cms
-              -title: Times of India _ Top Stories
+                title: Times of India _ Top Stories
 
               - url: https://timesofindia.indiatimes.com/rssfeeds/-2128838597.cms
                 title: Times of India _ Mumbai
