@@ -10,9 +10,11 @@ pages:
             collapse-after: 3
             cache: 3h
             feeds:
-              - url: https://ciechanow.ski/atom.xml
-              - url: https://www.joshwcomeau.com/rss.xml
-                title: Josh Comeau
+              - url: https://timesofindia.indiatimes.com/rssfeedstopstories.cms
+              -title: Times of India - Top Stories
+
+              - url: https://timesofindia.indiatimes.com/rssfeeds/-2128838597.cms
+                title: Times of India - Mumbai
               - url: https://samwho.dev/rss.xml
               - url: https://awesomekling.github.io/feed.xml
               - url: https://ishadeed.com/feed.xml
@@ -63,3 +65,12 @@ pages:
                 name: AMD
               - symbol: RDDT
                 name: Reddit
+  - name: Test
+    columns:
+      - size: full
+        widgets:
+          - type: 
+            repository: 2024-CMPU9010-GROUP-3/magpie
+            pull-requests-limit: 5
+            issues-limit: 3
+            commits-limit: 3
