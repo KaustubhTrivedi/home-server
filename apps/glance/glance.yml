@@ -5,16 +5,6 @@ pages:
         widgets:
           - type: calendar
 
-          # - type: rss
-          #   limit: 10
-          #   collapse-after: 3
-          #   cache: 3h
-          #   feeds:
-          #     - url: https://samwho.dev/rss.xml
-          #     - url: https://awesomekling.github.io/feed.xml
-          #     - url: https://ishadeed.com/feed.xml
-          #       title: Ahmad Shadeed
-
           - type: twitch-channels
             channels:
               - theprimeagen
