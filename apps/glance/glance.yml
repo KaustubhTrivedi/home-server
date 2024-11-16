@@ -12,12 +12,12 @@ pages:
             feeds:
               - url: https://brightspace.tudublin.ie/d2l/le/news/rss/341461/course?token=ahgeb1me967avgab109f0&ou=341461
                 title: Brightspace
-              - url: https://www.joshwcomeau.com/rss.xml
-                title: Josh Comeau
-              - url: https://samwho.dev/rss.xml
-              - url: https://awesomekling.github.io/feed.xml
-              - url: https://ishadeed.com/feed.xml
-                title: Ahmad Shadeed
+              # - url: https://www.joshwcomeau.com/rss.xml
+              #   title: Josh Comeau
+              # - url: https://samwho.dev/rss.xml
+              # - url: https://awesomekling.github.io/feed.xml
+              # - url: https://ishadeed.com/feed.xml
+              #   title: Ahmad Shadeed
 
           - type: twitch-channels
             channels:
