@@ -1,0 +1,60 @@
+name: Deploy to VPS
+
+on:
+  pull_request:
+    branches: ["app", "infra"]
+    types: [closed]
+
+jobs:
+  deploy:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v41
+        with:
+          files: |
+            Apps/**
+            Infra/**
+
+      - name: Deploy to VPS
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd /path/to/your/project
+            git fetch origin
+            git checkout ${{ github.event.pull_request.base.ref }}
+            git pull origin ${{ github.event.pull_request.base.ref }}
+
+            # Function to extract directory from file path
+            get_service_dir() {
+              echo "$1" | cut -d'/' -f1,2
+            }
+
+            # Create array of unique service directories
+            declare -A services
+
+            # Process changed files
+            for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+              if [[ $file == Apps/* ]] || [[ $file == Infra/* ]]; then
+                service_dir=$(get_service_dir "$file")
+                services["$service_dir"]=1
+              fi
+            done
+
+            # Restart services that had changes
+            for service_dir in "${!services[@]}"; do
+              echo "Deploying $service_dir"
+              cd "/path/to/your/project/$service_dir"
+              docker compose down
+              docker compose up -d
+            done
