@@ -27,7 +27,7 @@ services:
     container_name: nominatim
     depends_on:
       postgres:
-        condition: service_healthy # Wait for PostgreSQL to be healthy
+        condition: service_healthy
     environment:
       NOMINATIM_POSTGRES_HOST: postgres
       NOMINATIM_POSTGRES_USER: nominatim
@@ -36,11 +36,12 @@ services:
     volumes:
       - nominatim_data:/var/lib/nominatim
       - ./data:/data # Mount the directory containing the .osm.pbf file
+      - ./wait-for-postgres.sh:/usr/local/bin/wait-for-postgres.sh
     networks:
       - nominatim_network
     ports:
       - "8080:8080"
-    command: bash -c "nominatim import --osm-file /data/yourfile.osm.pbf --threads 4 && nominatim webserver"
+    command: bash -c "/usr/local/bin/wait-for-postgres.sh && nominatim import --osm-file /data/yourfile.osm.pbf --threads 4 && nominatim webserver"
 
 volumes:
   postgres_data:
