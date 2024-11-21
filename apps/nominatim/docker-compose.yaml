@@ -1,0 +1,34 @@
+version: '3.9'
+
+services:
+  postgres:
+    image: postgres:latest
+    container_name: postgres_nominatim
+    environment:
+      POSTGRES_USER: nominatim
+      POSTGRES_PASSWORD: nominatim
+      POSTGRES_DB: nominatim
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  nominatim:
+    image: mediagis/nominatim:4.5
+    container_name: nominatim
+    depends_on:
+      - postgres
+    environment:
+      NOMINATIM_POSTGRES_HOST: postgres
+      NOMINATIM_POSTGRES_USER: nominatim
+      NOMINATIM_POSTGRES_PASSWORD: nominatim
+      NOMINATIM_POSTGRES_DBNAME: nominatim
+    volumes:
+      - nominatim_data:/var/lib/nominatim
+    ports:
+      - "8080:8080"
+    command: bash -c "nominatim import --threads 4 && nominatim webserver"
+
+volumes:
+  postgres_data:
+  nominatim_data:
