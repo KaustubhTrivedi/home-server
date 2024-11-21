@@ -1,48 +1,21 @@
-version: '3.9'
-
-networks:
-  nominatim_network:
-    driver: bridge
-
 services:
-  postgres:
-    image: postgres:latest
-    container_name: postgres_nominatim
-    environment:
-      POSTGRES_USER: nominatim
-      POSTGRES_PASSWORD: nominatim
-      POSTGRES_DB: nominatim
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    networks:
-      - nominatim_network
-    healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U nominatim" ]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-
   nominatim:
     image: mediagis/nominatim:4.5
     container_name: nominatim
-    depends_on:
-      postgres:
-        condition: service_healthy
     environment:
-      NOMINATIM_POSTGRES_HOST: postgres
-      NOMINATIM_POSTGRES_USER: nominatim
-      NOMINATIM_POSTGRES_PASSWORD: nominatim
-      NOMINATIM_POSTGRES_DBNAME: nominatim
+      NOMINATIM_POSTGRES_HOST: localhost # Replace with your actual PostgreSQL host (e.g., dbserver or IP)
+      NOMINATIM_POSTGRES_PORT: 5432 # Default PostgreSQL port
+      NOMINATIM_POSTGRES_USER: nominatim # Replace with the PostgreSQL user
+      NOMINATIM_POSTGRES_PASSWORD: nominatim # Replace with the PostgreSQL password
+      NOMINATIM_POSTGRES_DBNAME: nominatim-db # Replace with your target database for Nominatim
     volumes:
       - nominatim_data:/var/lib/nominatim
-      - ./data:/data
-      - ./wait-for-postgres.sh:/usr/local/bin/wait-for-postgres.sh
+      - ./data:/data # Mount the directory containing the .osm.pbf file
     networks:
       - nominatim_network
     ports:
       - "8080:8080"
-    command: bash -c "/usr/local/bin/wait-for-postgres.sh && PGHOST=postgres createdb -U nominatim nominatim && nominatim import --osm-file /data/yourfile.osm.pbf --threads 4 && nominatim webserver"
+    command: bash -c "nominatim import --osm-file /data/dublin.osm.pbf --threads 4 && nominatim webserver"
 
 volumes:
-  postgres_data:
   nominatim_data:
