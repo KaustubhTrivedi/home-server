@@ -25,9 +25,10 @@ services:
       NOMINATIM_POSTGRES_DBNAME: nominatim
     volumes:
       - nominatim_data:/var/lib/nominatim
+      - ./data:/data # Mount the current directory's "data" folder into the container
     ports:
       - "8080:8080"
-    command: bash -c "nominatim import --threads 4 && nominatim webserver"
+    command: bash -c "nominatim import --osm-file /data/yourfile.osm.pbf --threads 4 && nominatim webserver"
 
 volumes:
   postgres_data:
