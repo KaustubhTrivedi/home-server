@@ -16,12 +16,18 @@ services:
       - postgres_data:/var/lib/postgresql/data
     networks:
       - nominatim_network
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U nominatim" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   nominatim:
     image: mediagis/nominatim:4.5
     container_name: nominatim
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy # Wait for PostgreSQL to be healthy
     environment:
       NOMINATIM_POSTGRES_HOST: postgres
       NOMINATIM_POSTGRES_USER: nominatim
