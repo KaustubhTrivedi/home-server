@@ -11,8 +11,6 @@ services:
     volumes:
       - nominatim_data:/var/lib/nominatim
       - ./data:/data # Mount the directory containing the .osm.pbf file
-    networks:
-      - nominatim_network
     ports:
       - "8080:8080"
     command: bash -c "nominatim import --osm-file /data/dublin.osm.pbf --threads 4 && nominatim webserver"
