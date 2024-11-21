@@ -41,7 +41,7 @@ services:
       - nominatim_network
     ports:
       - "8080:8080"
-    command: bash -c "/usr/local/bin/wait-for-postgres.sh && nominatim import --osm-file /data/yourfile.osm.pbf --threads 4 && nominatim webserver"
+    command: bash -c "/usr/local/bin/wait-for-postgres.sh && PGHOST=postgres createdb -U nominatim nominatim && nominatim import --osm-file /data/dublin.osm.pbf --threads 4 && nominatim webserver"
 
 volumes:
   postgres_data:
