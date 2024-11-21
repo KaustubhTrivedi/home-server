@@ -1,5 +1,9 @@
 version: '3.9'
 
+networks:
+  nominatim_network:
+    driver: bridge
+
 services:
   postgres:
     image: postgres:latest
@@ -10,8 +14,8 @@ services:
       POSTGRES_DB: nominatim
     volumes:
       - postgres_data:/var/lib/postgresql/data
-    ports:
-      - "5432:5432"
+    networks:
+      - nominatim_network
 
   nominatim:
     image: mediagis/nominatim:4.5
@@ -25,7 +29,9 @@ services:
       NOMINATIM_POSTGRES_DBNAME: nominatim
     volumes:
       - nominatim_data:/var/lib/nominatim
-      - ./data:/data # Mount the current directory's "data" folder into the container
+      - ./data:/data # Mount the directory containing the .osm.pbf file
+    networks:
+      - nominatim_network
     ports:
       - "8080:8080"
     command: bash -c "nominatim import --osm-file /data/yourfile.osm.pbf --threads 4 && nominatim webserver"
