@@ -3,7 +3,7 @@ services:
     image: mediagis/nominatim:4.5
     container_name: nominatim
     environment:
-      NOMINATIM_POSTGRES_HOST: localhost # Replace with your actual PostgreSQL host (e.g., dbserver or IP)
+      NOMINATIM_POSTGRES_HOST: 127.0.0.1 # Replace with your actual PostgreSQL host (e.g., dbserver or IP)
       NOMINATIM_POSTGRES_PORT: 5432 # Default PostgreSQL port
       NOMINATIM_POSTGRES_USER: nominatim # Replace with the PostgreSQL user
       NOMINATIM_POSTGRES_PASSWORD: nominatim # Replace with the PostgreSQL password
