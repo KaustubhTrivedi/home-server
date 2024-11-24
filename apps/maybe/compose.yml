@@ -57,6 +57,9 @@ services:
       POSTGRES_USER: ${POSTGRES_USER:-maybe_user}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?}
 
+    networks:
+      - proxy_connect
+
     depends_on:
       postgres:
         condition: service_healthy
@@ -79,3 +82,8 @@ services:
 volumes:
   app-storage:
   postgres-data:
+
+
+networks:
+  proxy_connect:
+    external: true
