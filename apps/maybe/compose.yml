@@ -28,7 +28,7 @@
 
 services:
 
-  app:
+  maybe:
     image: ghcr.io/maybe-finance/maybe:latest
 
     volumes:
@@ -36,6 +36,13 @@ services:
 
     ports:
       - 3002:3000
+
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.maybe.rule=Host(`maybe.${DOMAIN}`)"
+      - "traefik.http.routers.maybe.entrypoints=websecure"
+      - "traefik.http.routers.maybe.tls.certresolver=cloudflare"
+      - "traefik.http.services.maybe.loadbalancer.server.port=3002" # Change if app uses different port
 
     restart: unless-stopped
 
