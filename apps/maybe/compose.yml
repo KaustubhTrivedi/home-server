@@ -10,7 +10,7 @@ services:
       - "traefik.http.routers.maybe.rule=Host(`maybe.${DOMAIN}`)"
       - "traefik.http.routers.maybe.entrypoints=websecure"
       - "traefik.http.routers.maybe.tls.certresolver=cloudflare"
-      - "traefik.http.services.maybe.loadbalancer.server.port=3002"
+      - "traefik.http.services.maybe.loadbalancer.server.port=3000"
     restart: unless-stopped
     environment:
       SELF_HOSTED: "true"
