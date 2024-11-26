@@ -24,7 +24,7 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?}
     networks:
       - proxy_connect
-      - internal_network
+      - maybe_internal
     depends_on:
       postgres:
         condition: service_healthy
@@ -44,7 +44,7 @@ services:
       timeout: 5s
       retries: 5
     networks:
-      - internal_network
+      - maybe_internal
 
 volumes:
   app-storage:
