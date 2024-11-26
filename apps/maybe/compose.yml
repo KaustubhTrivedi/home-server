@@ -54,6 +54,5 @@ volumes:
 networks:
   proxy_connect:
     external: true
-  internal_network:
-    name: maybe_internal
-    internal: true
+  maybe_internal:
+    driver: bridge
