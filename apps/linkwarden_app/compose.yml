@@ -26,3 +26,7 @@ services:
       - ./data:/data/data
     depends_on:
       - postgres
+
+networks:
+  proxy_connect:
+    external: true
