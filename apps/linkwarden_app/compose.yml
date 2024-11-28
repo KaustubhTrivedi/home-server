@@ -14,7 +14,7 @@ services:
     image: ghcr.io/linkwarden/linkwarden:latest # comment this line to build from source
     env_file: .env
     environment:
-      - DATABASE_URL=postgresql://postgres:${POSTGRES_PASSWORD}@localhost:5432/postgres
+      - DATABASE_URL=postgresql://postgres:${POSTGRES_PASSWORD}@postgres:5432/postgres
     restart: always
     labels:
       - "traefik.enable=true"
