@@ -15,9 +15,9 @@ services:
       - "--certificatesresolvers.cloudflare.acme.email=kaus12tri@gmail.com"
       - "--certificatesresolvers.cloudflare.acme.storage=/letsencrypt/acme.json"
     labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.web.rule=Host(`traefik.${MYDOMAIN}`)"
-      - "traefik.http.services.web.loadbalancer.server.port=443"
+      - "traefik.http.routers.traefik.rule=Host(`traefik.${MYDOMAIN}`)" # Change to your desired domain
+      - "traefik.http.routers.traefik.service=api@internal" # Point to the internal API
+      - "traefik.http.routers.traefik.entrypoints=websecure" # Use the HTTP entry point
     ports:
       - "80:80" # Expose HTTP (Cloudflare forwards this)
       - "443:443" # Expose HTTPS (Cloudflare forwards this)
@@ -27,3 +27,7 @@ services:
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro" # Docker provider
       - "./letsencrypt:/letsencrypt" # Let's Encrypt storage
+networks:
+  default:
+    external:
+      name: traefik-network
