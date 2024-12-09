@@ -18,19 +18,8 @@ services:
       - "80:80" # Expose HTTP (Cloudflare forwards this)
       - "443:443" # Expose HTTPS (Cloudflare forwards this)
     environment:
-      - CF_API_EMAIL=your-cloudflare-email@example.com # Cloudflare account email
-      - CF_API_KEY=your-global-api-key # Cloudflare Global API Key
+      - CF_API_EMAIL=kaus12tri@gmail.com # Cloudflare account email
+      - CF_API_KEY=${CF_API_KEY} # Cloudflare Global API Key
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro" # Docker provider
       - "./letsencrypt:/letsencrypt" # Let's Encrypt storage
-
-  # Example service
-  app:
-    image: nginx
-    container_name: nginx-app
-    restart: always
-    labels:
-      - "traefik.enable=true" # Expose container to Traefik
-      - "traefik.http.routers.app.rule=Host(`example.com`)" # Routing rule
-      - "traefik.http.routers.app.tls.certresolver=cloudflare" # Use Cloudflare resolver
-      - "traefik.http.services.app.loadbalancer.server.port=80" # Internal port
