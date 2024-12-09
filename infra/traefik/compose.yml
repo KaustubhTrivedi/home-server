@@ -4,30 +4,17 @@ services:
     container_name: traefik
     restart: always
     command:
-      - "--api.dashboard=true" # Enable dashboard
-      - "--providers.docker=true" # Enable Docker provider
-      - "--providers.docker.exposedbydefault=false" # Don't expose containers by deault
-      - "--entrypoints.web.address=:80" # HTTP entry point
-      - "--entrypoints.websecure.address=:443" # HTTPS entry point
-      - "--entrypoints.websecure.http.tls=true" # Enable TLS on HTTPS
-      - "--certificatesresolvers.cloudflare.acme.dnschallenge=true" # DNS challenge for certs
-      - "--certificatesresolvers.cloudflare.acme.dnschallenge.provider=cloudflare" # Cloudflare DNS provider
-      - "--certificatesresolvers.cloudflare.acme.email=kaus12tri@gmail.com"
-      - "--certificatesresolvers.cloudflare.acme.storage=/letsencrypt/acme.json"
-    labels:
-      - "traefik.http.routers.traefik.rule=Host(`traefik.${MYDOMAIN}`)" # Change to your desired domain
-      - "traefik.http.routers.traefik.service=api@internal" # Point to the internal API
-      - "traefik.http.routers.traefik.entrypoints=websecure" # Use the HTTP entry point
+      - "--api.dashboard=true"
+      - "--providers.docker=true"
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+      - "--entrypoints.websecure.http.tls=true"
     ports:
-      - "80:80" # Expose HTTP (Cloudflare forwards this)
-      - "443:443" # Expose HTTPS (Cloudflare forwards this)
-    environment:
-      - CF_API_EMAIL=kaus12tri@gmail.com # Cloudflare account email
-      - CF_API_KEY=${CF_API_KEY} # Cloudflare Global API Key
+      - "80:80"
+      - "443:443"
     volumes:
-      - "/var/run/docker.sock:/var/run/docker.sock:ro" # Docker provider
-      - "./letsencrypt:/letsencrypt" # Let's Encrypt storage
-networks:
-  default:
-    name: traefik-network
-    external: true
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+    labels:
+      - "traefik.http.routers.traefik.rule=Host(`traefik.kaustubhsstuff.com`)"
+      - "traefik.http.routers.traefik.service=api@internal"
+      - "traefik.http.routers.traefik.entrypoints=websecure"
