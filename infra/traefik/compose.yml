@@ -29,5 +29,5 @@ services:
       - "./letsencrypt:/letsencrypt" # Let's Encrypt storage
 networks:
   default:
-    external:
-      name: traefik-network
+    name: traefik-network
+    external: true
