@@ -6,7 +6,7 @@ services:
     command:
       - "--api.dashboard=true" # Enable dashboard
       - "--providers.docker=true" # Enable Docker provider
-      - "--providers.docker.exposedbydefault=false" # Don't expose containers by default
+      - "--providers.docker.exposedbydefault=false" # Don't expose containers by deault
       - "--entrypoints.web.address=:80" # HTTP entry point
       - "--entrypoints.websecure.address=:443" # HTTPS entry point
       - "--entrypoints.websecure.http.tls=true" # Enable TLS on HTTPS
@@ -14,6 +14,10 @@ services:
       - "--certificatesresolvers.cloudflare.acme.dnschallenge.provider=cloudflare" # Cloudflare DNS provider
       - "--certificatesresolvers.cloudflare.acme.email=kaus12tri@gmail.com"
       - "--certificatesresolvers.cloudflare.acme.storage=/letsencrypt/acme.json"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.web.rule=Host(`traefik.${MYDOMAIN}`)"
+      - "traefik.http.services.web.loadbalancer.server.port=80"
     ports:
       - "80:80" # Expose HTTP (Cloudflare forwards this)
       - "443:443" # Expose HTTPS (Cloudflare forwards this)
