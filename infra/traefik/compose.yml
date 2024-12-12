@@ -12,6 +12,7 @@ services:
       - "--providers.docker.exposedByDefault=false"
       - "--providers.docker.network=traefik-public"
       - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
       - "--entrypoints.web.forwardedHeaders.insecure"
       - "--entrypoints.web.proxyProtocol.insecure"
       - "--accesslog=true"
