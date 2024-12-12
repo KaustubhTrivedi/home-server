@@ -6,13 +6,12 @@ services:
     security_opt:
       - no-new-privileges:true
     command:
-      - "--log.level=DEBUG" # Enable debug logging
+      - "--log.level=INFO" # Enable debug logging
       - "--api=true" # Enable API explicitly
       - "--api.dashboard=true"
-      - "--api.insecure=true" # For testing only
       - "--providers.docker=true"
       - "--providers.docker.exposedByDefault=false"
-      - "--providers.docker.network=traefik-public"
+      - "--providers.docker.network=proxy_connect"
       - "--entrypoints.web.address=:80"
       - "--entrypoints.websecure.address=:443"
       - "--entrypoints.web.forwardedHeaders.insecure=true"
