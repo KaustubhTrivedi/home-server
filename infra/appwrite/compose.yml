@@ -13,7 +13,7 @@ services:
     restart: unless-stopped
     networks:
       - appwrite
-      - traefik-public
+      - proxy_connect
     labels:
       - traefik.enable=true
       - traefik.constraint-label-stack=appwrite
@@ -848,7 +848,7 @@ networks:
     name: appwrite
   runtimes:
     name: runtimes
-  traefik-public:
+  proxy_connect:
     external: true
 
 volumes:
