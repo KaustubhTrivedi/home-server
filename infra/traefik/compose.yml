@@ -44,6 +44,7 @@ services:
       - "traefik.http.routers.api.service=api@internal"
       - "traefik.http.routers.api.entrypoints=web"
       - "traefik.http.routers.api.middlewares=auth"
+      - "traefik.docker.network=proxy_connect"
 
 volumes:
   traefik-certificates:
