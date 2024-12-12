@@ -30,7 +30,7 @@ services:
       - "./logs:/var/log/traefik"
       - "traefik-certificates:/certificates"
     networks:
-      - traefik-public
+      - proxy_connect
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.dashboard.rule=Host(`traefik.kaustubhsstuff.com`)"
