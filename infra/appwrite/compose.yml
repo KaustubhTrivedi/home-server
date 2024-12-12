@@ -5,31 +5,6 @@ x-logging: &x-logging
       max-file: '5'
       max-size: '10m'
 services:
-  traefik:
-    image: traefik:2.11
-    container_name: appwrite-traefik
-    <<: *x-logging
-    command:
-      - --providers.file.directory=/storage/config
-      - --providers.file.watch=true
-      - --providers.docker=true
-      - --providers.docker.exposedByDefault=false
-      - --providers.docker.constraints=Label(`traefik.constraint-label-stack`,`appwrite`)
-      - --entrypoints.appwrite_web.address=:80
-      - --entrypoints.appwrite_websecure.address=:443
-    restart: unless-stopped
-    ports:
-      - 80:80
-      - 443:443
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - appwrite-config:/storage/config:ro
-      - appwrite-certificates:/storage/certificates:ro
-    depends_on:
-      - appwrite
-    networks:
-      - gateway
-      - appwrite
 
   appwrite:
     image: appwrite/appwrite:1.6.0
@@ -38,10 +13,11 @@ services:
     restart: unless-stopped
     networks:
       - appwrite
+      - traefik-public
     labels:
       - traefik.enable=true
       - traefik.constraint-label-stack=appwrite
-      - traefik.docker.network=appwrite
+      - traefik.docker.network=traefik-public
       - traefik.http.services.appwrite_api.loadbalancer.server.port=80
       #http
       - traefik.http.routers.appwrite_api_http.entrypoints=appwrite_web
@@ -872,6 +848,8 @@ networks:
     name: appwrite
   runtimes:
     name: runtimes
+  traefik-public:
+    external: true
 
 volumes:
   appwrite-mariadb:
