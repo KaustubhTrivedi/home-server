@@ -2,7 +2,7 @@ services:
   test:
     image: nginx:alpine
     ports:
-      - 8083:81
+      - 8084:81
     container_name: test
     labels:
       - "traefik.enable=true"
