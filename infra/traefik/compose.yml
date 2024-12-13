@@ -6,7 +6,7 @@ services:
     security_opt:
       - no-new-privileges:true
     command:
-      - "--log.level=INFO" # Enable debug logging
+      - "--log.level=DEBUG" # Enable debug logging
       - "--api=true" # Enable API explicitly
       - "--api.dashboard=true"
       - "--api.insecure=true" # For testing only
