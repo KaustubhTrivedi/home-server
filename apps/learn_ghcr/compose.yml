@@ -3,5 +3,5 @@ services:
   react-app:
     image: ghcr.io/kaustubhtrivedi/learn_ghcr:latest
     ports:
-      - "80:3000"
+      - "3000:3000"
     restart: unless-stopped
