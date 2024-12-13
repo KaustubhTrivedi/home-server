@@ -14,11 +14,10 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.vaultwarden.rule=Host(`vaultwarden.kaustubhsstuff.com`)"
-      - "traefik.http.services.vaultwarden.loadbalancer.server.port=81"
       - "traefik.http.routers.glance.tls.certresolver=cloudflare"
       - "traefik.http.routers.vaultwarden.entrypoints=websecure"
       - "traefik.http.routers.vaultwarden.tls=true"
-      - "traefik.docker.network=proxy_connect"
+      - "traefik.http.services.vaultwarden.loadbalancer.server.port=81"
 
 networks:
   proxy_connect:
