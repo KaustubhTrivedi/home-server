@@ -1,4 +1,14 @@
 services:
+  test:
+    image: nginx:alpine
+    container_name: test
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.test.rule=Host(`test.kaustubhsstuff.com`)"
+      - "traefik.http.routers.test.entrypoints=websecure"
+    networks:
+      - proxy_connect
+
   traefik:
     image: traefik:latest
     container_name: traefik
