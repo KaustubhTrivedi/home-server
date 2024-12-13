@@ -43,7 +43,7 @@ services:
       # Dashboard router configuration
       - "traefik.http.routers.api.rule=Host(`traefik.kaustubhsstuff.com`)"
       - "traefik.http.routers.api.service=api@internal"
-      - "traefik.http.routers.api.entrypoints=web"
+      - "traefik.http.routers.api.entrypoints=websecure" # Change to websecure
       - "traefik.http.routers.api.middlewares=auth"
 
 volumes:
