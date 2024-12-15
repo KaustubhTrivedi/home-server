@@ -1,7 +1,7 @@
 version: '3.8'
 services:
   react-app:
-    image: ghcr.io/kaustubhtrivedi/learn_ghcr:0.0.5
+    image: ghcr.io/kaustubhtrivedi/learn_ghcr:latest
     ports:
       - "3000:3000"
     restart: unless-stopped
