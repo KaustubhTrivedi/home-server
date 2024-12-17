@@ -1,7 +1,19 @@
-version: '3.8'
 services:
-  react-app:
+  learn-ghcr:
     image: ghcr.io/kaustubhtrivedi/learn_ghcr:latest
     ports:
       - "3000:3000"
     restart: unless-stopped
+    networks:
+      - proxy_connect
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.learn-ghcr.rule=Host(`learnghcr.kaustubhsstuff.com`)"
+      - "traefik.http.routers.learn-ghcr.entrypoints=websecure"
+      - "traefik.http.routers.learn-ghcr.tls=true"
+      - "traefik.http.routers.learn-ghcr.tls.certresolver=cloudflare"
+      - "traefik.http.services.learn-ghcr.loadbalancer.server.port=3000"
+
+networks:
+  proxy_connect:
+    external: true
