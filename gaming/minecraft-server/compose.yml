@@ -1,6 +1,8 @@
 services:
   minecraft:
-    build: .
+    image: itzg/minecraft-server
+    tty: true
+    stdin_open: true
     container_name: minecraft-server
     ports:
       - "25565:25565" # This will still be used internally for the server
@@ -11,10 +13,9 @@ services:
       - "traefik.http.routers.minecraft.entrypoints=web"
       - "traefik.http.routers.minecraft.tls.certresolver=cloudflare"
     volumes:
-      - minecraft_data:/usr/src/minecraft
+      - ./mc_data:/usr/src/minecraft
     environment:
       - EULA=TRUE
-    # restart: unless-stopped
 
 volumes:
   minecraft_data:
