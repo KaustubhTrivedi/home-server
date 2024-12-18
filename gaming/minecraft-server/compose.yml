@@ -14,7 +14,7 @@ services:
       - minecraft_data:/usr/src/minecraft
     environment:
       - EULA=TRUE
-    restart: unless-stopped
+    # restart: unless-stopped
 
 volumes:
   minecraft_data:
