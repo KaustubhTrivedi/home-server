@@ -5,7 +5,7 @@ FROM openjdk:21-jdk-alpine
 WORKDIR /usr/src/minecraft
 
 # Copy the server jar into the container
-COPY paper-1.19.3-123.jar /usr/src/minecraft/
+COPY paper-1.21.4.jar /usr/src/minecraft/
 
 # Expose the Minecraft default port
 EXPOSE 25565
