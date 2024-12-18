@@ -1,5 +1,5 @@
 # Use an official Java runtime as a parent image
-FROM openjdk:21-jdk-nanoserver
+FROM openjdk:21-ubuntu
 
 # Set the working directory
 WORKDIR /usr/src/minecraft
