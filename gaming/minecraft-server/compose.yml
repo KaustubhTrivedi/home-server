@@ -9,7 +9,7 @@ services:
       - "traefik.http.services.minecraft.loadbalancer.server.port=25565"
       - "traefik.http.routers.minecraft.rule=Host(`minecraft.kaustubhsstuff.com`)"
       - "traefik.http.routers.minecraft.entrypoints=web"
-      - "traefik.http.routers.minecraft.tls.certresolver=le"
+      - "traefik.http.routers.minecraft.tls.certresolver=cloudflare"
     volumes:
       - ./mc_data:/usr/src/minecraft
     environment:

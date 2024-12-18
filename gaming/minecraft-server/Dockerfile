@@ -5,10 +5,10 @@ FROM mcr.microsoft.com/openjdk/jdk:21-ubuntu
 WORKDIR /usr/src/minecraft
 
 # Copy the server jar into the container
-COPY paper-1.21.4.jar /usr/src/minecraft/
+COPY paper.jar /usr/src/minecraft/
 
 # Expose the Minecraft default port
 EXPOSE 25565
 
 # Set the entry point to run the Minecraft server
-CMD ["java", "-Xmx2G", "-Xms1G", "-jar", "paper-1.21.4.jar", "nogui"]
+CMD ["java", "-Xmx2G", "-Xms1G", "-jar", "paper.jar", "nogui"]
