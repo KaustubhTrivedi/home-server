@@ -1,0 +1,21 @@
+services:
+  minecraft:
+    build: .
+    container_name: minecraft-server
+    ports:
+      - "25565:25565" # This will still be used internally for the server
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.services.minecraft.loadbalancer.server.port=25565"
+      - "traefik.http.routers.minecraft.rule=Host(`minecraft.kaustubhsstuff.com`)"
+      - "traefik.http.routers.minecraft.entrypoints=web"
+      - "traefik.http.routers.minecraft.tls.certresolver=le"
+    volumes:
+      - ./mc_data:/usr/src/minecraft
+    environment:
+      - EULA=TRUE
+    restart: always
+
+volumes:
+  minecraft_data:
+    driver: local
