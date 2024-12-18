@@ -1,9 +1,9 @@
 services:
   minecraft:
-    image: itzg/minecraft-server
-    tty: true
-    stdin_open: true
+    build: .
     container_name: minecraft-server
+    stdin_open: true
+    tty: true
     ports:
       - "25565:25565" # This will still be used internally for the server
     labels:
@@ -16,7 +16,3 @@ services:
       - ./mc_data:/data
     environment:
       - EULA=TRUE
-
-volumes:
-  minecraft_data:
-    driver: local
