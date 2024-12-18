@@ -11,4 +11,4 @@ COPY paper-1.21.4.jar /usr/src/minecraft/
 EXPOSE 25565
 
 # Set the entry point to run the Minecraft server
-CMD ["java", "-Xmx2G", "-Xms1G", "-jar", "paper-1.19.3-123.jar", "nogui"]
+CMD ["java", "-Xmx2G", "-Xms1G", "-jar", "paper-1.21.4.jar", "nogui"]
