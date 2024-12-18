@@ -1,6 +1,6 @@
 services:
   minecraft:
-    build: .
+    image: itzg/minecraft-server
     container_name: minecraft-server
     stdin_open: true
     tty: true
@@ -16,3 +16,4 @@ services:
       - ./mc_data:/data
     environment:
       - EULA=TRUE
+      - TYPE=PAPER
