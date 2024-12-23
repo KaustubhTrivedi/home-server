@@ -15,7 +15,7 @@ services:
     #  - 5984:5984
     restart: unless-stopped
     networks:
-      - proxy
+      - proxy_connect
     labels:
       - "traefik.enable=true"
       # The Traefik Network
