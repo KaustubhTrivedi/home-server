@@ -1,0 +1,20 @@
+services:
+  vaultwarden:
+    image: ghcr.io/kaustubhtrivedi/meet-portfolio:latest
+    container_name: meet_portfolio
+    restart: unless-stopped
+    ports:
+      - 3005:3000
+    networks:
+      - proxy_connect
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.vaultwarden.rule=Host(`meetport.kaustubhsstuff.com`)"
+      - "traefik.http.routers.vaultwarden.tls.certresolver=cloudflare"
+      - "traefik.http.routers.vaultwarden.entrypoints=websecure"
+      - "traefik.http.routers.vaultwarden.tls=true"
+      - "traefik.http.services.vaultwarden.loadbalancer.server.port=3000"
+
+networks:
+  proxy_connect:
+    external: true
