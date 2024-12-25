@@ -4,7 +4,7 @@ services:
     container_name: meet_portfolio
     restart: unless-stopped
     ports:
-      - 4173:4173
+      - 3005:3000
     networks:
       - proxy_connect
     labels:
@@ -13,7 +13,7 @@ services:
       - "traefik.http.routers.meet_portfolio.tls.certresolver=cloudflare"
       - "traefik.http.routers.meet_portfolio.entrypoints=websecure"
       - "traefik.http.routers.meet_portfolio.tls=true"
-      - "traefik.http.services.meet_portfolio.loadbalancer.server.port=4173"
+      - "traefik.http.services.meet_portfolio.loadbalancer.server.port=3000"
 
 networks:
   proxy_connect:
