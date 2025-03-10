@@ -14,7 +14,6 @@ services:
       - "8080:8080" #Traefik Dashboard
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - ./letsencrypt:/letsencrypt #if using origin certificates
       - ./traefik.log:/var/log/traefik/access.log
     labels:
       - "traefik.enable=true"
@@ -23,5 +22,3 @@ services:
       - "traefik.http.routers.traefik.service=api@internal"
     environment:
       DOMAIN: ${DOMAIN}
-volumes:
-  letsencrypt:
