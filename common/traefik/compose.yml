@@ -3,7 +3,7 @@ services:
   traefik:
     image: traefik:v2.10
     command:
-      - "--api.insecure=false" #Disable insecure api in production.
+      - "--api.insecure=false"
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
       - "--entrypoints.web.address=:80"
@@ -11,14 +11,14 @@ services:
       - "--accesslog.filepath=/var/log/traefik/access.log"
     ports:
       - "80:80"
-      - "8080:8080" #Traefik Dashboard
+      - "8080:8080"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./traefik.log:/var/log/traefik/access.log
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.traefik.entrypoints=web"
-      - "traefik.http.routers.traefik.rule=Host(`traefik.${DOMAIN}`)" #subdomain label
+      - "traefik.http.routers.traefik.rule=Host(`traefik.${DOMAIN}`)"
       - "traefik.http.routers.traefik.service=api@internal"
     environment:
       DOMAIN: ${DOMAIN}
