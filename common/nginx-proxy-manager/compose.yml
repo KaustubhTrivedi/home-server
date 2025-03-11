@@ -4,7 +4,7 @@ services:
     restart: unless-stopped
     ports:
       - '8080:80'
-      - '81:81'
+      - '82:81'
       - '443:443'
     volumes:
       - ./data:/data
