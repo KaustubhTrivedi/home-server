@@ -25,8 +25,6 @@ services:
       - "traefik.http.routers.glance.tls.certresolver=myresolver"
     volumes:
       - ./config:/app/config
-    ports:
-      - 8080:8080
 
 volumes:
   letsencrypt:
