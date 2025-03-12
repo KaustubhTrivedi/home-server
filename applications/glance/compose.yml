@@ -1,7 +1,25 @@
 services:
+  reverse-proxy:
+    image: traefik:v3.1
+    command:
+      - "--api.insecure=true"
+      - "--providers.docker"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entryPoints.websecure.address=:443"
+      - "--certificateresolvers.myresolver.acme.tlschallenge=true"
+      - "--certificateresolvers.myresolver.acme.email=kaustubh@kaustubhsstuff.com"
+      - "--certificateresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
+    ports:
+     - "443:443"
+     - "8080:8080"
+    volume:
+      - letsencrypt:/letsencrypt
+      - /var/run/docker.sock:/var/run/docker.sock
   glance:
     container_name: glance
     image: glanceapp/glance
+    labels:
+      - "traefik.http.routers.glance.rule=Host('kaustubhsstuff.com')"
     volumes:
       - ./config:/app/config
     ports:
