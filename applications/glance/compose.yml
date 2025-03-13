@@ -3,7 +3,7 @@ services:
     container_name: glance
     image: glanceapp/glance
     labels:
-      - "traefik.enable=true"
+      # - "traefik.enable=true"
       - "traefik.http.routers.glance.rule=Host('kaustubhsstuff.com')"
     volumes:
       - ./config:/app/config
