@@ -2,6 +2,8 @@ services:
   glance:
     container_name: glance
     image: glanceapp/glance
+    ports:
+      - "8081:8081"
     labels:
       # - "traefik.enable=true"
       - "traefik.http.routers.glance.rule=Host('kaustubhsstuff.com')"
