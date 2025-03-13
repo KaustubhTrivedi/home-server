@@ -5,8 +5,6 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.glance.rule=Host('kaustubhsstuff.com')"
-      - "traefik.http.routers.glance.entrypoints=websecure"
-      - "traefik.http.routers.glance.tls.certresolver=myresolver"
     volumes:
       - ./config:/app/config
       - letsencrypt:/app/letsencrypt
