@@ -1,4 +1,5 @@
-reverse-proxy:
+services:
+  reverse-proxy:
     image: traefik:v3.3
     command:
       - "--api.insecure=true"
