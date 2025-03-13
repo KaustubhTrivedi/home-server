@@ -1,19 +1,11 @@
 services:
-  reverse-proxy:
-    image: traefik:v3.3
-    command: 
-      - "--api.insecure=true"
-      - "--providers.docker"
-    ports:
-      - "80:80"
-      - "8080:8080"
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
+  
   glance:
     container_name: glance
     image: glanceapp/glance
     labels:
       - "traefik.http.routers.glance.rule=Host(`kaustubhsstuff.com`)"
+      - "traefik.http.services.glance.loadbalancer.server.port=8081"
     volumes:
       - ./config:/app/config
       - letsencrypt:/app/letsencrypt
