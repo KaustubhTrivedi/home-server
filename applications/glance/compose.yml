@@ -1,4 +1,9 @@
 services:
+  reverse-proxy:
+    image: traefik:v3.3
+    command: 
+      - "--api.insecure=true"
+      - "--providers.docker"
   glance:
     container_name: glance
     image: glanceapp/glance
