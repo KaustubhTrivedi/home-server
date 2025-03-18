@@ -1,14 +1,35 @@
 services:
-  reverse-proxy:
+  traefik:
     image: traefik:v3.3
     command: 
-      - "--api.insecure=true"
-      - "--providers.docker"
+      - --api.insecure=true
+      - --api.dashboard=true
+      - --providers.docker
+      - --log.level=INFO
+      - --accesslog=true
+      - --providers.docker.network=proxy
+      - --providers.docker.exposedByDefault=false
+      - --entrypoints.web.address=:80
+      - --entrypoints.web.http.redirections.entrypoint.to=websecure
+      - --entryPoints.web.http.redirections.entrypoint.scheme=https
+      - --entrypoints.websecure.address=:443
+      - --entrypoints.websecure.asDefault=true 
+      - --entrypoints.websecure.http.tls.certresolver=myresolver
+      - --certificatesresolvers.myresolver.acme.email=mail@example.com
+      - --certificatesresolvers.myresolver.acme.tlschallenge=true
+      - --certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.mydashboard.rule=Host(`traefik.kaustubhsstuff.com`)
+      - traefik.http.routers.mydashboard.service=api@internal
+
     ports:
       - "80:80"
       - "8080:8080"
+      - "443:443"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+      - letsencrypt:/letsencrypt
     networks:
       - traefik-network
 
