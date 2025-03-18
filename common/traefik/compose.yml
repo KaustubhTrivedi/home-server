@@ -20,8 +20,8 @@ services:
       - --certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json
     labels:
       - traefik.enable=true
-      - traefik.http.routers.mydashboard.rule=Host(`traefik.kaustubhsstuff.com`)
-      - traefik.http.routers.mydashboard.service=api@internal
+      - traefik.http.routers.traefik.rule=Host(`traefik.kaustubhsstuff.com`)
+      - traefik.http.routers.traefik.service=api@internal
 
     ports:
       - "80:80"
