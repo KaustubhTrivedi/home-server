@@ -1,0 +1,39 @@
+# Logs and temporary files
+*.log
+.DS_Store
+Thumbs.db
+
+# Environment variables
+.env
+
+# Backup files
+*.backup
+*.bak
+backup-*
+
+# Local data directories
+local-files/*
+!local-files/.gitkeep
+
+# Docker volumes (if using bind mounts)
+data/
+postgres-data/
+
+# SSL certificates (if stored locally)
+ssl/
+certificates/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db

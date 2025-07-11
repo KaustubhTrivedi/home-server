@@ -1,0 +1,5 @@
+# This file ensures the local-files directory is tracked in git
+# while keeping its contents ignored (see .gitignore)
+# 
+# This directory is mounted to /files in the n8n container
+# and can be used for file operations in workflows

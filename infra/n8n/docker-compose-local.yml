@@ -1,0 +1,50 @@
+# Local Development Docker Compose
+# Use this for local development without SSL/domain requirements
+
+services:
+  n8n:
+    image: docker.n8n.io/n8nio/n8n:latest
+    restart: unless-stopped
+    ports:
+      - "5678:5678"
+    environment:
+      - GENERIC_TIMEZONE=${GENERIC_TIMEZONE:-UTC}
+      - TZ=${GENERIC_TIMEZONE:-UTC}
+      - N8N_HOST=localhost
+      - N8N_PORT=5678
+      - N8N_PROTOCOL=http
+      - WEBHOOK_URL=http://localhost:5678/
+      - NODE_ENV=development
+      # Uncomment for PostgreSQL
+      # - DB_TYPE=postgresdb
+      # - DB_POSTGRESDB_DATABASE=${POSTGRES_DB:-n8n}
+      # - DB_POSTGRESDB_HOST=postgres
+      # - DB_POSTGRESDB_PORT=5432
+      # - DB_POSTGRESDB_USER=${POSTGRES_USER:-n8n}
+      # - DB_POSTGRESDB_PASSWORD=${POSTGRES_PASSWORD}
+    volumes:
+      - n8n_data:/home/node/.n8n
+      - ./local-files:/files
+    # Uncomment if using PostgreSQL
+    # depends_on:
+    #   - postgres
+
+  # Uncomment this section if you want to use PostgreSQL
+  # postgres:
+  #   image: postgres:15
+  #   restart: unless-stopped
+  #   environment:
+  #     - POSTGRES_DB=${POSTGRES_DB:-n8n}
+  #     - POSTGRES_USER=${POSTGRES_USER:-n8n}
+  #     - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+  #   volumes:
+  #     - postgres_data:/var/lib/postgresql/data
+  #   ports:
+  #     - "127.0.0.1:5432:5432"
+
+volumes:
+  n8n_data:
+    external: false
+  # Uncomment if using PostgreSQL
+  # postgres_data:
+  #   external: false
