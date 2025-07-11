@@ -20,11 +20,13 @@ services:
     volumes:
       - n8n_data:/home/node/.n8n
       - ./local-files:/files
+    networks:
+      - npm_default
 
 volumes:
   n8n_data:
     external: false
 
 networks:
-  default:
-    name: n8n-network
+  npm_default:
+    external: true  # Use the existing nginx proxy manager network
