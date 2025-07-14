@@ -1,7 +1,7 @@
 services:
   stirling-pdf:
     image: docker.stirlingpdf.com/stirlingtools/stirling-pdf:latest
-    container_name: sterling-pdf
+    container_name: stirling-pdf
     ports:
       - '3002:3002'
     networks:
@@ -15,3 +15,7 @@ services:
     environment:
       - DISABLE_ADDITIONAL_FEATURES=false
       - LANGS=en_GB
+
+networks:
+  npm_default:
+    external: true
