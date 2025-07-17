@@ -22,6 +22,11 @@ services:
       STORAGE_PROVIDER: "local"
       UPLOAD_DIRECTORY: "/uploads"
       NEXT_PUBLIC_UPLOAD_DIRECTORY: "/uploads"
+      
+      # Google OAuth Configuration
+      GOOGLE_CLIENT_ID: "1082689628690-vak7t3i0k9kfealvee25qa0873d609mk.apps.googleusercontent.com"
+      GOOGLE_CLIENT_SECRET: "your-google-client-secret"
+      GOOGLE_CALLBACK_URL: "https://postiz.kaustubhsstuff.com/auth/google/callback"
     volumes:
       - postiz-config:/config/
       - postiz-uploads:/uploads/
