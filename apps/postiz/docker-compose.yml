@@ -6,7 +6,7 @@ services:
     environment:
       # You must change these. Replace `postiz.your-server.com` with your DNS name - this needs to be exactly the URL you're accessing Postiz on.
       MAIN_URL: "https://postiz.kaustubhsstuff.com"
-      FRONTEND_URL: "https://postiz-fe.kaustubhsstuff.com"
+      FRONTEND_URL: "https://postiz.kaustubhsstuff.com"
       NEXT_PUBLIC_BACKEND_URL: "https://postiz.kaustubhsstuff.com/api"
       JWT_SECRET: "a8f3c9e7d1b5k2j6h4g9m5n7p2q4r8s6t3v5w7x9z1"
  
