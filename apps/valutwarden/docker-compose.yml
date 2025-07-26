@@ -3,9 +3,15 @@ services:
     image: vaultwarden/server:latest
     container_name: vaultwarden
     restart: unless-stopped
+    networks:
+      - npm_default
     environment:
       DOMAIN: "https://vw.kaustubhsstuff.com"
     volumes:
       - ./vw-data/:/data/
     ports:
       - 8082:80
+
+networks:
+  npm_default:
+    external: true
