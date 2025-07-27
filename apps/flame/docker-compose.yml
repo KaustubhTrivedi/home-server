@@ -16,4 +16,4 @@ services:
 
 networks:
   npm_default:
-    driver: bridge
+    external: true
