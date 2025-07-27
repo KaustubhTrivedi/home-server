@@ -1,0 +1,19 @@
+services:
+  flame:
+    image: pawelmalak/flame
+    container_name: flame
+    volumes:
+      - /home/kaustubh/flame/data:/app/data
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - npm_default
+    ports:
+      - 5005:5005
+    environment:
+      - PASSWORD=flame_password
+      - PASSWORD_FILE=/run/secrets/password
+    restart: unless-stopped
+
+networks:
+  npm_default:
+    driver: bridge
