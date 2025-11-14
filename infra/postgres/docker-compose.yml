@@ -4,8 +4,8 @@ services:
     container_name: postgres
     restart: always
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: mypostgrespw
+      POSTGRES_USER: kaustubh
+      POSTGRES_PASSWORD: 02101999_Mypw
       PGDATA: /var/lib/postgresql/data/pgdata
     volumes:
       - pgdata:/var/lib/postgresql/data
@@ -16,7 +16,7 @@ services:
       - "127.0.0.1:5432:5432"  # bind to localhost only
 
   pgbouncer:
-    image: edoburu/pgbouncer:1.16
+    image: bitnami/pgbouncer:latest
     container_name: pgbouncer
     restart: always
     depends_on: 
@@ -26,7 +26,7 @@ services:
     ports:
       - "127.0.0.1:6432:6432"  # apps on the VPS can use localhost:6432
     environment:
-      - DATABASE_URL=postgres://postgres:mypostgrespw@postgres:5432/postgres
+      - DATABASE_URL=postgres://postgres:02101999_Mypw@postgres:5432/postgres
 
   # postgres_exporter:
   #   image: prometheuscommunity/postgres-exporter
