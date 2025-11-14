@@ -16,7 +16,7 @@ services:
       - "127.0.0.1:5432:5432"  # bind to localhost only
 
   pgbouncer:
-    image: bitnami/pgbouncer:latest
+    image: edoburu/pgbouncer:latest
     container_name: pgbouncer
     restart: always
     depends_on: 
