@@ -1,0 +1,21 @@
+version: "3.9"
+
+services:
+  chroma:
+    image: chromadb/chroma:latest
+    container_name: chroma
+    restart: unless-stopped
+    # We DO NOT publish a host port here; Nginx Proxy Manager will talk to it over the Docker network
+    expose:
+      - "8000"
+    volumes:
+      - ./chroma-data:/chroma/chroma
+    environment:
+      # Optional but recommended
+      ANONYMIZED_TELEMETRY: "False"
+    networks:
+      - npm_default
+
+networks:
+  npm_default:
+    external: true
